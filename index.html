@@ -1,207 +1,98 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>会社紹介デジタルサイネージ</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>展示製品のご紹介</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
       font-family: sans-serif;
-      background-color: #000;
-      text-align: center;
-    }
-
-    .screen {
-      display: none;
-      padding: 20px;
+      background-image: url('assets/images/bg_top.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      min-height: 100vh;
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
-    .active {
-      display: block;
+    .overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5); /* 半透明の黒で文字を読みやすく */
+      z-index: 0;
     }
 
-    .menu {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      padding: 40px;
+    h1 {
+      position: relative;
+      z-index: 1;
+      font-size: 3vw;
+      color: #ffffff;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+      margin-bottom: 60px;
+      text-align: center;
     }
 
-    .button {
-      background-color: #007BFF;
+    .buttons {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 90%;
+    }
+
+    .buttons a {
+      width: 250px;
+      padding: 20px;
+      background-color: rgba(0, 123, 255, 0.85);
       color: white;
-      padding: 20px;
-      font-size: 1.5em;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    .company-content {
-      max-width: 1000px;
-      margin: auto;
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 20px;
+      font-size: 1.6vw;
+      text-align: center;
+      text-decoration: none;
       border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      transition: background-color 0.3s;
+      user-select: none;
     }
 
-    .company-image {
-      max-width: 100%;
-      height: auto;
-      margin: 20px 0;
+    .buttons a:hover {
+      background-color: rgba(0, 90, 180, 0.9);
     }
 
-    video {
-      width: 90%;
-      max-width: 1280px;
-      height: auto;
-      margin: 20px auto;
-      display: block;
-    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 6vw;
+      }
 
-    .back-button {
-      margin-top: 30px;
-      padding: 15px 30px;
-      font-size: 1.2em;
-      background-color: #444;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      .buttons a {
+        width: 180px;
+        font-size: 4vw;
+      }
     }
-
-    /* 背景画像を会社別に設定 */
-    .bg-companyA { background-image: url('backgrounds/companyA_bg.jpg'); }
-    .bg-companyB { background-image: url('backgrounds/companyB_bg.jpg'); }
-    .bg-companyC { background-image: url('backgrounds/companyC_bg.jpg'); }
-    .bg-companyD { background-image: url('backgrounds/companyD_bg.jpg'); }
-    .bg-companyE { background-image: url('backgrounds/companyE_bg.jpg'); }
-    .bg-companyF { background-image: url('backgrounds/companyF_bg.jpg'); }
   </style>
 </head>
 <body>
 
-<!-- トップメニュー -->
-<div id="home" class="screen active">
-  <h1 style="color: white; padding-top: 20px;">会社紹介 - タッチしてください</h1>
-  <div class="menu">
-    <button class="button" onclick="showCompany('companyA')">会社A</button>
-    <button class="button" onclick="showCompany('companyB')">会社B</button>
-    <button class="button" onclick="showCompany('companyC')">会社C</button>
-    <button class="button" onclick="showCompany('companyD')">会社D</button>
-    <button class="button" onclick="showCompany('companyE')">会社E</button>
-    <button class="button" onclick="showCompany('companyF')">会社F</button>
+  <div class="overlay"></div>
+
+  <h1>展示製品のご紹介 - タッチでお選びください</h1>
+
+  <div class="buttons">
+    <a href="company1.html">株式会社テックリンク</a>
+    <a href="company2.html">会社Ａ</a>
+    <a href="company3.html">会社Ｂ</a>
+    <a href="company4.html">会社Ｃ</a>
+    <a href="company5.html">会社Ｄ</a>
+    <a href="company6.html">会社Ｅ</a>
   </div>
-</div>
-
-<!-- 各社紹介ページ -->
-<div id="companyA" class="screen bg-companyA">
-  <div class="company-content">
-    <h2>会社A</h2>
-    <p>会社Aは、革新的なテクノロジーを用いた製品開発に注力しています。</p>
-    <img src="images/companyA_logo.jpg" alt="会社Aロゴ" class="company-image">
-    <video controls>
-      <source src="videos/companyA_intro.mp4" type="video/mp4">
-      このブラウザは動画をサポートしていません。
-    </video>
-    <button class="back-button" onclick="goHome()">戻る</button>
-  </div>
-</div>
-
-<!-- 以下、他の会社も同様に -->
-
-<div id="companyB" class="screen bg-companyB">
-  <div class="company-content">
-    <h2>会社B</h2>
-    <p>会社Bは、環境に優しいエネルギーソリューションを提供します。</p>
-    <img src="images/companyB_logo.jpg" alt="会社Bロゴ" class="company-image">
-    <video controls>
-      <source src="videos/companyB_intro.mp4" type="video/mp4">
-    </video>
-    <button class="back-button" onclick="goHome()">戻る</button>
-  </div>
-</div>
-
-<div id="companyC" class="screen bg-companyC">
-  <div class="company-content">
-    <h2>会社C</h2>
-    <p>会社Cは、グローバルな物流ネットワークで信頼されています。</p>
-    <img src="images/companyC_logo.jpg" alt="会社Cロゴ" class="company-image">
-    <video controls>
-      <source src="videos/companyC_intro.mp4" type="video/mp4">
-    </video>
-    <button class="back-button" onclick="goHome()">戻る</button>
-  </div>
-</div>
-
-<div id="companyD" class="screen bg-companyD">
-  <div class="company-content">
-    <h2>会社D</h2>
-    <p>会社Dは、ITソリューションを通じて業務効率化を支援します。</p>
-    <img src="images/companyD_logo.jpg" alt="会社Dロゴ" class="company-image">
-    <video controls>
-      <source src="videos/companyD_intro.mp4" type="video/mp4">
-    </video>
-    <button class="back-button" onclick="goHome()">戻る</button>
-  </div>
-</div>
-
-<div id="companyE" class="screen bg-companyE">
-  <div class="company-content">
-    <h2>会社E</h2>
-    <p>会社Eは、地域密着のサービスで高い顧客満足を実現。</p>
-    <img src="images/companyE_logo.jpg" alt="会社Eロゴ" class="company-image">
-    <video controls>
-      <source src="videos/companyE_intro.mp4" type="video/mp4">
-    </video>
-    <button class="back-button" onclick="goHome()">戻る</button>
-  </div>
-</div>
-
-<div id="companyF" class="screen bg-companyF">
-  <div class="company-content">
-    <h2>会社F</h2>
-    <p>会社Fは、先進的な医療機器で人々の健康を支えています。</p>
-    <img src="images/companyF_logo.jpg" alt="会社Fロゴ" class="company-image">
-    <video controls>
-      <source src="videos/companyF_intro.mp4" type="video/mp4">
-    </video>
-    <button class="back-button" onclick="goHome()">戻る</button>
-  </div>
-</div>
-
-<script>
-  let inactivityTimer;
-
-  function resetInactivityTimer() {
-    clearTimeout(inactivityTimer);
-    inactivityTimer = setTimeout(() => {
-      goHome();
-    }, 60000); // 1分
-  }
-
-  function showCompany(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    resetInactivityTimer();
-  }
-
-  function goHome() {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById('home').classList.add('active');
-    clearTimeout(inactivityTimer);
-  }
-
-  // 操作イベント検出でタイマーリセット
-  ['click', 'touchstart', 'mousemove', 'keydown'].forEach(event => {
-    document.addEventListener(event, resetInactivityTimer, false);
-  });
-</script>
 
 </body>
 </html>
